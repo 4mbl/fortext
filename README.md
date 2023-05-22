@@ -22,13 +22,13 @@ Text stylizer for Python. Mainly useful for CLI output.
 * It's also recommended to use a [virtual environment](https://docs.python.org/3/library/venv.html).
   * Linux / MacOS
     ```bash
-    python3 -m venv venv-name
+    python3 -m venv <venv-name>
     source venv/bin/activate
     ```
   * Windows
     ```bash
-    python3 -m venv venv-name
-    venv/Scripts/activate
+    python3 -m venv <venv-name>
+    <venv-name>/Scripts/activate
     ```
 
 ### Installation
