@@ -6,6 +6,8 @@ RESET = f'{ESC}0m'
 
 
 class Fg(Enum):
+    """ANSI escape codes for foreground colors.
+    """
     DEFAULT = 39
     BLACK = 30
     RED = 31
@@ -26,6 +28,8 @@ class Fg(Enum):
 
 
 class Bg(Enum):
+    """ANSI escape codes for background colors.
+    """
     DEFAULT = 49
     BLACK = 40
     RED = 41
@@ -46,6 +50,8 @@ class Bg(Enum):
 
 
 class Formatting(IntEnum):
+    """ANSI escape codes for text formatting.
+    """
     DEFAULT = 0
     BOLD = 1
     FAINT = 2
@@ -60,25 +66,73 @@ class Formatting(IntEnum):
     OVERLINE = 53
 
 
-def fg_rgb(rgb_color: tuple):
+def fg_rgb(rgb_color: Tuple[int, int, int]) -> str:
+    """Converts an RGB tuple to an ANSI escape code for foreground color.
+
+    Args:
+        rgb_color (Tuple[int, int, int]): Tuple of RGB values as integers.
+
+    Returns:
+        str: ANSI escape code for foreground color.
+    """
     return f'38;2;{rgb_color[0]};{rgb_color[1]};{rgb_color[2]}'
 
 
-def fg_hex(hex_color: str):
+def fg_hex(hex_color: str) -> str:
+    """Converts a hex color string to an ANSI escape code for foreground color.
+
+    Args:
+        hex_color (str): Hex color string.
+
+    Returns:
+        str: ANSI escape code for foreground color.
+    """
     return fg_rgb(hex2rgb(hex_color))
 
 
-def bg_rgb(rgb_color: tuple):
+def bg_rgb(rgb_color: Tuple[int, int, int]) -> str:
+    """Converts an RGB tuple to an ANSI escape code for background color.
+
+    Args:
+        rgb_color (Tuple[int, int, int]): Tuple of RGB values as integers.
+
+    Returns:
+        str: ANSI escape code for background color.
+    """
     return f'48;2;{rgb_color[0]};{rgb_color[1]};{rgb_color[2]}'
 
 
 def bg_hex(hex_color: str):
+    """Converts a hex color string to an ANSI escape code for background color.
+
+    Args:
+        hex_color (str): Hex color string.
+
+    Returns:
+        str: ANSI escape code for background color.
+    """
     return bg_rgb(hex2rgb(hex_color))
 
 
 def hex2rgb(hex_color: str) -> Tuple[int, int, int]:
+    """Converts a hex color string to an RGB tuple of integers.
 
-    def hex2dec(hex_str: str):
+    Args:
+        hex_color (str): Hex color string.
+
+    Returns:
+        Tuple[int, int, int]: RGB tuple of integers.
+    """
+
+    def hex2dec(hex_str: str) -> int:
+        """Converts a hex string to an base 10 integer.
+
+        Args:
+            hex_str (str): Hex string.
+
+        Returns:
+            int: Base 10 integer.
+        """
         return int(hex_str, 16)
 
     if hex_color[0] == '#':

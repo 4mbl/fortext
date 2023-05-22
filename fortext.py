@@ -1,5 +1,5 @@
 from typing import List, Tuple
-from ansi import Fg, Bg, Style, ESC, RESET, bg_hex, bg_rgb, fg_hex, fg_rgb
+from ansi import Fg, Bg, Formatting, ESC, RESET, bg_hex, bg_rgb, fg_hex, fg_rgb
 
 
 def style(text: str,
@@ -8,6 +8,19 @@ def style(text: str,
           bg: Bg | str | Tuple[int, int, int] |
           List[int, int, int] = Bg.DEFAULT,
           formatting: List[Formatting] = None) -> str:
+    """ Styles string using ANSI escape codes.
+
+    Args:
+        text (str): String to style.
+        fg (Fg | str | Tuple[int, int, int] | List[int, int, int], optional): Foreground color.
+            Either a Fg enum, a hex color string, or an RGB tuple or list.
+        bg (Bg | str | Tuple[int, int, int] | List[int, int, int], optional): Background color.
+            Either a Bg enum, a hex color string, or an RGB tuple or list.
+        format (Format[Style], optional): List of formatting to apply.
+
+    Returns:
+        str: Styled text.
+    """
 
     if fg is None:
         fg = Fg.DEFAULT
