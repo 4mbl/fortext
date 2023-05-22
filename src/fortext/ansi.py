@@ -49,7 +49,7 @@ class Bg(Enum):
     BRIGHT_WHITE = 107
 
 
-class Formatting(IntEnum):
+class Frmt(IntEnum):
     """ANSI escape codes for text formatting.
     """
     DEFAULT = 0

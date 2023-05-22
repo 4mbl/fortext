@@ -1,5 +1,5 @@
 from typing import List, Tuple, Union
-from .ansi import Fg, Bg, Formatting, ESC, RESET, bg_hex, bg_rgb, fg_hex, fg_rgb
+from .ansi import Fg, Bg, Frmt, ESC, RESET, bg_hex, bg_rgb, fg_hex, fg_rgb
 
 
 def style(text: str,
@@ -7,7 +7,7 @@ def style(text: str,
           List[Union[int, int, int]] = Fg.DEFAULT,
           bg: Bg | str | Tuple[int, int, int] |
           List[Union[int, int, int]] = Bg.DEFAULT,
-          formatting: List[Formatting] = None) -> str:
+          frmt: List[Frmt] = None) -> str:
     """ Styles string using ANSI escape codes.
 
     Args:
@@ -16,7 +16,7 @@ def style(text: str,
             Either a Fg enum, a hex color string, or an RGB tuple or list.
         bg (Bg | str | Tuple[int, int, int] | List[int, int, int], optional): Background color.
             Either a Bg enum, a hex color string, or an RGB tuple or list.
-        format (Format[Style], optional): List of formatting to apply.
+        frmt (Frmt[Style], optional): List of formatting to apply.
 
     Returns:
         str: Styled text.
@@ -40,13 +40,13 @@ def style(text: str,
     if isinstance(bg, Bg):
         back = bg.value
 
-    if formatting is None:
-        formatting = []
+    if frmt is None:
+        frmt = []
     else:
-        formatting.sort()
+        frmt.sort()
 
-    formatting_string = ''
-    for frmt in formatting:
-        formatting_string += f';{frmt.value}'
+    frmt_string = ''
+    for frmt in frmt:
+        frmt_string += f';{frmt.value}'
 
-    return f'{ESC}{fore};{back}{formatting_string}m{text}{RESET}'
+    return f'{ESC}{fore};{back}{frmt_string}m{text}{RESET}'
