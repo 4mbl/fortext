@@ -45,7 +45,7 @@ class Bg(Enum):
     BRIGHT_WHITE = 107
 
 
-class Style(IntEnum):
+class Formatting(IntEnum):
     DEFAULT = 0
     BOLD = 1
     FAINT = 2

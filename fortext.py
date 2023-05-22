@@ -2,12 +2,12 @@ from typing import List, Tuple
 from ansi import Fg, Bg, Style, ESC, RESET, bg_hex, bg_rgb, fg_hex, fg_rgb
 
 
-def color(text: str,
+def style(text: str,
           fg: Fg | str | Tuple[int, int, int] |
           List[int, int, int] = Fg.DEFAULT,
           bg: Bg | str | Tuple[int, int, int] |
           List[int, int, int] = Bg.DEFAULT,
-          styles: List[Style] = None) -> str:
+          formatting: List[Formatting] = None) -> str:
 
     if fg is None:
         fg = Fg.DEFAULT
@@ -27,13 +27,13 @@ def color(text: str,
     if isinstance(bg, Bg):
         back = bg.value
 
-    if styles is None:
-        styles = []
+    if formatting is None:
+        formatting = []
     else:
-        styles.sort()
+        formatting.sort()
 
-    style_string = ''
-    for style in styles:
-        style_string += f';{style.value}'
+    formatting_string = ''
+    for frmt in formatting:
+        formatting_string += f';{frmt.value}'
 
-    return f'{ESC}{fore};{back}{style_string}m{text}{RESET}'
+    return f'{ESC}{fore};{back}{formatting_string}m{text}{RESET}'
