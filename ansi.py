@@ -1,4 +1,5 @@
 from enum import Enum, IntEnum
+from typing import Tuple
 
 ESC = '\033['
 RESET = f'{ESC}0m'
@@ -57,3 +58,34 @@ class Style(IntEnum):
     STRIKETHROUGH = 9
     DOUBLE_UNDERLINE = 21
     OVERLINE = 53
+
+
+def fg_rgb(rgb_color: tuple):
+    return f'38;2;{rgb_color[0]};{rgb_color[1]};{rgb_color[2]}'
+
+
+def fg_hex(hex_color: str):
+    return fg_rgb(hex2rgb(hex_color))
+
+
+def bg_rgb(rgb_color: tuple):
+    return f'48;2;{rgb_color[0]};{rgb_color[1]};{rgb_color[2]}'
+
+
+def bg_hex(hex_color: str):
+    return bg_rgb(hex2rgb(hex_color))
+
+
+def hex2rgb(hex_color: str) -> Tuple[int, int, int]:
+
+    def hex2dec(hex_str: str):
+        return int(hex_str, 16)
+
+    if hex_color[0] == '#':
+        hex_color = hex_color[1:]
+
+    r = hex2dec(hex_color[0:2])
+    g = hex2dec(hex_color[2:4])
+    b = hex2dec(hex_color[4:6])
+
+    return (r, g, b)
