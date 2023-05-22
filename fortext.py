@@ -1,12 +1,13 @@
-from typing import List, Tuple
-from ansi import Fg, Bg, Formatting, ESC, RESET, bg_hex, bg_rgb, fg_hex, fg_rgb
+from typing import List, Tuple, Union
+
+from ansi.ansi import Fg, Bg, Formatting, ESC, RESET, bg_hex, bg_rgb, fg_hex, fg_rgb
 
 
 def style(text: str,
           fg: Fg | str | Tuple[int, int, int] |
-          List[int, int, int] = Fg.DEFAULT,
+          List[Union[int, int, int]] = Fg.DEFAULT,
           bg: Bg | str | Tuple[int, int, int] |
-          List[int, int, int] = Bg.DEFAULT,
+          List[Union[int, int, int]] = Bg.DEFAULT,
           formatting: List[Formatting] = None) -> str:
     """ Styles string using ANSI escape codes.
 
