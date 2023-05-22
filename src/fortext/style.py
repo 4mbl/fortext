@@ -1,6 +1,5 @@
 from typing import List, Tuple, Union
-
-from ansi.ansi import Fg, Bg, Formatting, ESC, RESET, bg_hex, bg_rgb, fg_hex, fg_rgb
+from .ansi import Fg, Bg, Formatting, ESC, RESET, bg_hex, bg_rgb, fg_hex, fg_rgb
 
 
 def style(text: str,
