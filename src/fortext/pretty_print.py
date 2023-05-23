@@ -1,20 +1,24 @@
 from fortext.style import style
 
-CLR_KEY = '#e06c75'
-CLR_ARR = '#e5c07b'
-CLR_DICT = '#ffd700'
-CLR_STR = '#98c379'
-CLR_NUM = '#d19a58'
-CLR_BOOL = '#d19a66'
+SYNTAX_HIGHLIGHT_COLORS = {
+    'key': '#e06c75',
+    'arr': '#e5c07b',
+    'dict': '#ffd700',
+    'str': '#98c379',
+    'num': '#d19a58',
+    'bool': '#d19a66',
+}
 
 
-def syntax_highlight_string(val):
+def syntax_highlight_string(val, colors=None):
+    if colors is None:
+        colors = SYNTAX_HIGHLIGHT_COLORS
     if isinstance(val, str):
-        return style(repr(val), fg=CLR_STR)
+        return style(repr(val), fg=colors['str'])
     if isinstance(val, int):
-        return style(repr(val), fg=CLR_NUM)
+        return style(repr(val), fg=colors['num'])
     if isinstance(val, bool):
-        return style(repr(val), fg=CLR_BOOL)
+        return style(repr(val), fg=colors['bool'])
     return repr(val)
 
 
@@ -23,16 +27,20 @@ def pretty_print_dict(dictionary: dict,
                       indent: int = 2,
                       curr_indent: int = 0,
                       trailing_comma=False,
-                      do_pre_indent=True):
-    lcub = style('{', fg=CLR_DICT)
-    rcub = style('}', fg=CLR_DICT)
+                      do_pre_indent=True,
+                      colors=None):
+    if colors is None:
+        colors = SYNTAX_HIGHLIGHT_COLORS
+
+    lcub = style('{', fg=colors['dict'])
+    rcub = style('}', fg=colors['dict'])
 
     pre_identation = " " * curr_indent if do_pre_indent else ''
     print(f'{pre_identation}{lcub}')
 
     for i, (key, val) in enumerate(dictionary.items()):
 
-        pretty_key = style(repr(key), fg=CLR_KEY)
+        pretty_key = style(repr(key), fg=colors['key'])
 
         if isinstance(val, dict):
             print(f'{" "*(curr_indent + indent)}{pretty_key}: ', end='')
@@ -57,12 +65,12 @@ def pretty_print_dict(dictionary: dict,
     print(f'{" "* curr_indent}{rcub}{"," if trailing_comma else ""}')
 
 
-def pretty_print_list(
-    lst: list,
-    trailing_comma=False,
-):
-    lsqb = style('[', fg=CLR_ARR)
-    rsqb = style(']', fg=CLR_ARR)
+def pretty_print_list(lst: list, trailing_comma=False, colors=None):
+    if colors is None:
+        colors = SYNTAX_HIGHLIGHT_COLORS
+
+    lsqb = style('[', fg=colors['arr'])
+    rsqb = style(']', fg=colors['arr'])
 
     print(f'{lsqb}', end='')
 
