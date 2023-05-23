@@ -1,5 +1,5 @@
 from typing import Dict, Optional
-from fortext.style import style
+from .style import style
 
 DEFAULT_SYNTAX_HIGHLIGHT_COLORS = {
     'key': '#e06c75',
