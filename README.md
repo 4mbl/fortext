@@ -8,6 +8,8 @@ Text stylizer for Python. Mainly useful for CLI output.
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
 * [Usage](#usage)
+  * [Text styling](#text-styling)
+  * [Syntax highlighting](#syntax-highlighting)
 
 
 
@@ -46,6 +48,8 @@ python3 -m pip install -r requirements.txt
 
 ## Usage
 
+### Text styling
+
 ```python
 print(style('Hi, human.', fg='#ff0000'))
 print(style('RGB tuple or list also works.', fg=(0, 255, 0)))
@@ -57,3 +61,12 @@ print(
           fg='#ff0000', bg=Bg.BLACK,
           frmt=[Frmt.BOLD, Frmt.UNDERLINE, Frmt.ITALIC]))
 ```
+
+### Syntax highlighting
+
+```python
+print(highlight({'somekey': 'somevalue', 'anotherkey': [12.4, True, 23]}))
+```
+Output:
+
+![syntax highlighting example output](./img/syntax_highlighting.png)
