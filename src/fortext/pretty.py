@@ -18,20 +18,19 @@ def syntax_highlight(val: any,
                      colors=None):
     if colors is None:
         colors = DEFAULT_SYNTAX_HIGHLIGHT_COLORS
-
     if isinstance(val, dict):
         return pretty_dict(val,
                            indent=indent,
                            curr_indent=curr_indent,
                            trailing_comma=trailing_comma,
-                           do_pre_indent=do_pre_indent,
+                           pre_indent=do_pre_indent,
                            colors=colors)
     if isinstance(val, list):
         return pretty_list(val,
                            indent=indent,
                            curr_indent=curr_indent,
                            trailing_comma=trailing_comma,
-                           do_pre_indent=do_pre_indent,
+                           pre_indent=do_pre_indent,
                            colors=colors)
     if isinstance(val, str):
         return style(repr(val), fg=colors['str'])
@@ -45,8 +44,8 @@ def syntax_highlight(val: any,
 def pretty_dict(dictionary: dict,
                 indent: int = 2,
                 curr_indent: int = 0,
-                trailing_comma=False,
-                do_pre_indent=True,
+                trailing_comma: bool = False,
+                pre_indent: bool = True,
                 colors=None):
     if colors is None:
         colors = DEFAULT_SYNTAX_HIGHLIGHT_COLORS
@@ -54,7 +53,7 @@ def pretty_dict(dictionary: dict,
     lcub = style('{', fg=colors['dict'])
     rcub = style('}', fg=colors['dict'])
 
-    pre_identation = " " * curr_indent if do_pre_indent else ''
+    pre_identation = " " * curr_indent if pre_indent else ''
     output_str = f'{pre_identation}{lcub}\n'
 
     for i, (key, val) in enumerate(dictionary.items()):
@@ -77,7 +76,7 @@ def pretty_list(lst: list,
                 indent: int = 2,
                 curr_indent: int = 0,
                 trailing_comma: bool = False,
-                do_pre_indent=True,
+                pre_indent: bool = True,
                 colors=None):
     if colors is None:
         colors = DEFAULT_SYNTAX_HIGHLIGHT_COLORS
@@ -85,7 +84,7 @@ def pretty_list(lst: list,
     lsqb = style('[', fg=colors['arr'])
     rsqb = style(']', fg=colors['arr'])
 
-    pre_identation = " " * curr_indent if do_pre_indent else ''
+    pre_identation = " " * curr_indent if pre_indent else ''
     output_str = f'{pre_identation}{lsqb}\n'
 
     for i, val in enumerate(lst):
