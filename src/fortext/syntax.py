@@ -1,3 +1,4 @@
+from typing import Dict, Optional
 from fortext.style import style
 
 DEFAULT_SYNTAX_HIGHLIGHT_COLORS = {
@@ -10,35 +11,48 @@ DEFAULT_SYNTAX_HIGHLIGHT_COLORS = {
 }
 
 
-def highlight(val: any,
+def highlight(value: any,
               indent=2,
               curr_indent=0,
               trailing_comma: bool = False,
-              do_pre_indent=True,
-              colors=None):
+              pre_indent=True,
+              colors: Optional[Dict[str, str]] = None):
+    """Converts a value to a string with syntax highlighting.
+
+    Args:
+        val (any): Value to highlight. Can be a dict, list, str, int, bool, etc.
+        indent (int, optional): Amount of spaces to indent.
+        curr_indent (int, optional): Current indent level.
+        trailing_comma (bool, optional): Whether to add a trailing comma to the last item in a list or dict.
+        pre_indent (bool, optional): Whether to indent the first line of a list or dict.
+        colors (Optional[Dict[str, str]], optional): Colors to use for syntax highlighting.
+
+    Returns:
+        str: Values as a string with syntax highlighting.
+    """
     if colors is None:
         colors = DEFAULT_SYNTAX_HIGHLIGHT_COLORS
-    if isinstance(val, dict):
-        return pretty_dict(val,
+    if isinstance(value, dict):
+        return pretty_dict(value,
                            indent=indent,
                            curr_indent=curr_indent,
                            trailing_comma=trailing_comma,
-                           pre_indent=do_pre_indent,
+                           pre_indent=pre_indent,
                            colors=colors)
-    if isinstance(val, list):
-        return pretty_list(val,
+    if isinstance(value, list):
+        return pretty_list(value,
                            indent=indent,
                            curr_indent=curr_indent,
                            trailing_comma=trailing_comma,
-                           pre_indent=do_pre_indent,
+                           pre_indent=pre_indent,
                            colors=colors)
-    if isinstance(val, str):
-        return style(repr(val), fg=colors['str'])
-    if isinstance(val, int):
-        return style(repr(val), fg=colors['num'])
-    if isinstance(val, bool):
-        return style(repr(val), fg=colors['bool'])
-    return repr(val)
+    if isinstance(value, str):
+        return style(repr(value), fg=colors['str'])
+    if isinstance(value, int):
+        return style(repr(value), fg=colors['num'])
+    if isinstance(value, bool):
+        return style(repr(value), fg=colors['bool'])
+    return repr(value)
 
 
 def pretty_dict(dictionary: dict,
@@ -46,7 +60,20 @@ def pretty_dict(dictionary: dict,
                 curr_indent: int = 0,
                 trailing_comma: bool = False,
                 pre_indent: bool = True,
-                colors=None):
+                colors: Optional[Dict[str, str]] = None):
+    """Converts a dict to a string with syntax highlighting.
+
+    Args:
+        dictionary (dict): Dictionary to syntax highlight.
+        indent (int, optional): Amount of spaces to indent.
+        curr_indent (int, optional): Current indent level.
+        trailing_comma (bool, optional): Whether to add a trailing comma to the last item in a list or dict.
+        pre_indent (bool, optional): Whether to indent the first line of a list or dict.
+        colors (Optional[Dict[str, str]], optional): Colors to use for syntax highlighting.
+
+    Returns:
+       str: Dictionary as a string with syntax highlighting.
+    """
     if colors is None:
         colors = DEFAULT_SYNTAX_HIGHLIGHT_COLORS
 
@@ -61,7 +88,7 @@ def pretty_dict(dictionary: dict,
         pretty_value = highlight(val,
                                  indent=indent,
                                  curr_indent=indent + curr_indent,
-                                 do_pre_indent=False,
+                                 pre_indent=False,
                                  colors=colors)
 
         comma = ',' if (i < len(dictionary) - 1) else ''
@@ -77,7 +104,20 @@ def pretty_list(lst: list,
                 curr_indent: int = 0,
                 trailing_comma: bool = False,
                 pre_indent: bool = True,
-                colors=None):
+                colors: Optional[Dict[str, str]] = None):
+    """Converts a list to a string with syntax highlighting.
+
+    Args:
+        lst (list): List to syntax highlight.
+        indent (int, optional): Amount of spaces to indent.
+        curr_indent (int, optional): Current indent level.
+        trailing_comma (bool, optional): Whether to add a trailing comma to the last item in a list or dict.
+        pre_indent (bool, optional): Whether to indent the first line of a list or dict.
+        colors (Optional[Dict[str, str]], optional): Colors to use for syntax highlighting.
+
+    Returns:
+        str: List as a string with syntax highlighting.
+    """
     if colors is None:
         colors = DEFAULT_SYNTAX_HIGHLIGHT_COLORS
 
@@ -91,7 +131,7 @@ def pretty_list(lst: list,
         pretty_value = highlight(val,
                                  indent=indent,
                                  curr_indent=indent + curr_indent,
-                                 do_pre_indent=False,
+                                 pre_indent=False,
                                  colors=colors)
         comma = ',' if (i < len(lst) - 1) else ''
         output_str += f'{" "*(curr_indent + indent)}{pretty_value}{comma}\n'
