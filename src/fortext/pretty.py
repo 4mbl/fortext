@@ -2,7 +2,7 @@ from fortext.style import style
 
 DEFAULT_SYNTAX_HIGHLIGHT_COLORS = {
     'key': '#e06c75',
-    'arr': '#e5c07b',
+    'arr': '#ffd700',
     'dict': '#ffd700',
     'str': '#98c379',
     'num': '#d19a58',
@@ -10,9 +10,29 @@ DEFAULT_SYNTAX_HIGHLIGHT_COLORS = {
 }
 
 
-def syntax_highlight_string(val, colors=None):
+def syntax_highlight(val: any,
+                     indent=2,
+                     curr_indent=0,
+                     trailing_comma: bool = False,
+                     do_pre_indent=True,
+                     colors=None):
     if colors is None:
         colors = DEFAULT_SYNTAX_HIGHLIGHT_COLORS
+
+    if isinstance(val, dict):
+        return pretty_dict(val,
+                           indent=curr_indent + indent,
+                           curr_indent=curr_indent + indent,
+                           trailing_comma=trailing_comma,
+                           do_pre_indent=do_pre_indent,
+                           colors=colors)
+    if isinstance(val, list):
+        return pretty_list(val,
+                           indent=curr_indent + indent,
+                           curr_indent=curr_indent + indent,
+                           trailing_comma=trailing_comma,
+                           do_pre_indent=do_pre_indent,
+                           colors=colors)
     if isinstance(val, str):
         return style(repr(val), fg=colors['str'])
     if isinstance(val, int):
@@ -23,7 +43,6 @@ def syntax_highlight_string(val, colors=None):
 
 
 def pretty_dict(dictionary: dict,
-                prettify_lists=False,
                 indent: int = 2,
                 curr_indent: int = 0,
                 trailing_comma=False,
@@ -39,44 +58,45 @@ def pretty_dict(dictionary: dict,
     output_str = f'{pre_identation}{lcub}\n'
 
     for i, (key, val) in enumerate(dictionary.items()):
-
         pretty_key = style(repr(key), fg=colors['key'])
-
-        if isinstance(val, dict):
-            output_str += f'{" "*(curr_indent + indent)}{pretty_key}: '
-            output_str += pretty_dict(val,
-                                      indent=curr_indent + indent,
-                                      curr_indent=curr_indent + indent,
-                                      trailing_comma=True,
-                                      do_pre_indent=False)
-            continue
-        if isinstance(val, list) and prettify_lists:
-            output_str += f'{" "*(curr_indent + indent)}{pretty_key}: '
-            output_str += f'{pretty_list(val)}\n'
-            continue
+        pretty_value = syntax_highlight(val,
+                                        indent=indent,
+                                        curr_indent=curr_indent,
+                                        do_pre_indent=False,
+                                        colors=colors)
 
         comma = ',' if (i < len(dictionary) - 1) else ''
-        pretty_value = syntax_highlight_string(val)
-
         output_str += f'{" "*(curr_indent + indent)}{pretty_key}: {pretty_value}{comma}\n'
 
-    output_str += f'{" "* curr_indent}{rcub}{"," if trailing_comma else ""}\n'
+    trailing_comma = ",\n" if trailing_comma else ""
+    output_str += f'{" "* curr_indent}{rcub}{trailing_comma}'
     return output_str
 
 
-def pretty_list(lst: list, trailing_comma=False, colors=None):
+def pretty_list(lst: list,
+                indent: int = 2,
+                curr_indent: int = 0,
+                trailing_comma: bool = False,
+                do_pre_indent=True,
+                colors=None):
     if colors is None:
         colors = DEFAULT_SYNTAX_HIGHLIGHT_COLORS
 
     lsqb = style('[', fg=colors['arr'])
     rsqb = style(']', fg=colors['arr'])
 
-    output_str = f'{lsqb}'
+    pre_identation = " " * curr_indent if do_pre_indent else ''
+    output_str = f'{pre_identation}{lsqb}\n'
 
     for i, val in enumerate(lst):
-        comma = ', ' if (i < len(lst) - 1) else ''
-        pretty_value = syntax_highlight_string(val)
-        output_str += f'{pretty_value}{comma}'
+        pretty_value = syntax_highlight(val,
+                                        indent=indent,
+                                        curr_indent=curr_indent,
+                                        do_pre_indent=False,
+                                        colors=colors)
+        comma = ',' if (i < len(lst) - 1) else ''
+        output_str += f'{" "*(curr_indent + indent)}{pretty_value}{comma}\n'
 
-    output_str += f'{rsqb}{"," if trailing_comma else ""}'
+    trailing_comma = ",\n" if trailing_comma else ""
+    output_str += f'{" "* curr_indent}{rsqb}{trailing_comma}'
     return output_str
