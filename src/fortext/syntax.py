@@ -49,7 +49,7 @@ def highlight(value: any,
                            colors=colors)
     if isinstance(value, str):
         return style(repr(value), fg=colors['str'])
-    if isinstance(value, int):
+    if isinstance(value, int) or isinstance(value, float):
         return style(repr(value), fg=colors['num'])
     if isinstance(value, bool):
         return style(repr(value), fg=colors['bool'])
