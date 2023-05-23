@@ -21,15 +21,15 @@ def syntax_highlight(val: any,
 
     if isinstance(val, dict):
         return pretty_dict(val,
-                           indent=curr_indent + indent,
-                           curr_indent=curr_indent + indent,
+                           indent=indent,
+                           curr_indent=curr_indent,
                            trailing_comma=trailing_comma,
                            do_pre_indent=do_pre_indent,
                            colors=colors)
     if isinstance(val, list):
         return pretty_list(val,
-                           indent=curr_indent + indent,
-                           curr_indent=curr_indent + indent,
+                           indent=indent,
+                           curr_indent=curr_indent,
                            trailing_comma=trailing_comma,
                            do_pre_indent=do_pre_indent,
                            colors=colors)
@@ -61,7 +61,7 @@ def pretty_dict(dictionary: dict,
         pretty_key = style(repr(key), fg=colors['key'])
         pretty_value = syntax_highlight(val,
                                         indent=indent,
-                                        curr_indent=curr_indent,
+                                        curr_indent=indent + curr_indent,
                                         do_pre_indent=False,
                                         colors=colors)
 
@@ -91,7 +91,7 @@ def pretty_list(lst: list,
     for i, val in enumerate(lst):
         pretty_value = syntax_highlight(val,
                                         indent=indent,
-                                        curr_indent=curr_indent,
+                                        curr_indent=indent + curr_indent,
                                         do_pre_indent=False,
                                         colors=colors)
         comma = ',' if (i < len(lst) - 1) else ''
