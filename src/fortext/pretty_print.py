@@ -1,6 +1,6 @@
 from fortext.style import style
 
-SYNTAX_HIGHLIGHT_COLORS = {
+DEFAULT_SYNTAX_HIGHLIGHT_COLORS = {
     'key': '#e06c75',
     'arr': '#e5c07b',
     'dict': '#ffd700',
@@ -12,7 +12,7 @@ SYNTAX_HIGHLIGHT_COLORS = {
 
 def syntax_highlight_string(val, colors=None):
     if colors is None:
-        colors = SYNTAX_HIGHLIGHT_COLORS
+        colors = DEFAULT_SYNTAX_HIGHLIGHT_COLORS
     if isinstance(val, str):
         return style(repr(val), fg=colors['str'])
     if isinstance(val, int):
@@ -30,7 +30,7 @@ def pretty_print_dict(dictionary: dict,
                       do_pre_indent=True,
                       colors=None):
     if colors is None:
-        colors = SYNTAX_HIGHLIGHT_COLORS
+        colors = DEFAULT_SYNTAX_HIGHLIGHT_COLORS
 
     lcub = style('{', fg=colors['dict'])
     rcub = style('}', fg=colors['dict'])
@@ -67,7 +67,7 @@ def pretty_print_dict(dictionary: dict,
 
 def pretty_print_list(lst: list, trailing_comma=False, colors=None):
     if colors is None:
-        colors = SYNTAX_HIGHLIGHT_COLORS
+        colors = DEFAULT_SYNTAX_HIGHLIGHT_COLORS
 
     lsqb = style('[', fg=colors['arr'])
     rsqb = style(']', fg=colors['arr'])
