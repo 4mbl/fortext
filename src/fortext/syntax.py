@@ -12,10 +12,10 @@ DEFAULT_SYNTAX_HIGHLIGHT_COLORS = {
 
 
 def highlight(value: any,
-              indent=2,
-              curr_indent=0,
+              indent: int = 2,
+              curr_indent: int = 0,
               trailing_comma: bool = False,
-              pre_indent=True,
+              pre_indent: bool = True,
               colors: Optional[Dict[str, str]] = None):
     """Converts a value to a string with syntax highlighting.
 
