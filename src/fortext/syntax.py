@@ -26,6 +26,7 @@ def highlight(value: any,
         trailing_comma (bool, optional): Whether to add a trailing comma to the last item in a list or dict.
         pre_indent (bool, optional): Whether to indent the first line of a list or dict.
         colors (Optional[Dict[str, str]], optional): Colors to use for syntax highlighting.
+            Uses `DEFAULT_SYNTAX_HIGHLIGHT_COLORS` if None.
 
     Returns:
         str: Values as a string with syntax highlighting.
@@ -70,6 +71,7 @@ def pretty_dict(dictionary: dict,
         trailing_comma (bool, optional): Whether to add a trailing comma to the last item in a list or dict.
         pre_indent (bool, optional): Whether to indent the first line of a list or dict.
         colors (Optional[Dict[str, str]], optional): Colors to use for syntax highlighting.
+            Uses `DEFAULT_SYNTAX_HIGHLIGHT_COLORS` if None.
 
     Returns:
        str: Dictionary as a string with syntax highlighting.
@@ -114,6 +116,7 @@ def pretty_list(lst: list,
         trailing_comma (bool, optional): Whether to add a trailing comma to the last item in a list or dict.
         pre_indent (bool, optional): Whether to indent the first line of a list or dict.
         colors (Optional[Dict[str, str]], optional): Colors to use for syntax highlighting.
+            Uses `DEFAULT_SYNTAX_HIGHLIGHT_COLORS` if None.
 
     Returns:
         str: List as a string with syntax highlighting.
