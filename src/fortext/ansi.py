@@ -143,3 +143,24 @@ def hex2rgb(hex_color: str) -> Tuple[int, int, int]:
     b = hex2dec(hex_color[4:6])
 
     return (r, g, b)
+
+
+def print_styles(ansi_type: Fg | Bg | Frmt) -> None:
+    """Prints all common ANSI escape codes for a given type.
+    """
+
+    for style in ansi_type:
+        print(f'{ESC}{style.value}mExample Text\t{RESET}({style.name}) ')
+
+
+def print_styles_all() -> None:
+    """Prints all common ANSI escape codes.
+    """
+    print_styles(Fg)
+    print()
+    print_styles(Bg)
+    print()
+    print_styles(Frmt)
+
+
+print_styles_all()
