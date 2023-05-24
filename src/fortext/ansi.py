@@ -161,6 +161,3 @@ def print_styles_all() -> None:
     print_styles(Bg)
     print()
     print_styles(Frmt)
-
-
-print_styles_all()
