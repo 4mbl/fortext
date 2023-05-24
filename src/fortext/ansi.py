@@ -59,7 +59,7 @@ class Frmt(IntEnum):
     UNDERLINE = 4
     BLINK_SLOW = 5
     BLINK_FAST = 6
-    REVERSE = 7
+    INVERT = 7
     HIDE = 8
     STRIKETHROUGH = 9
     DOUBLE_UNDERLINE = 21
