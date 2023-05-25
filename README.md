@@ -10,6 +10,7 @@ Text stylizer for Python. Mainly useful for CLI output.
 * [Usage](#usage)
   * [Text styling](#text-styling)
   * [Syntax highlighting](#syntax-highlighting)
+  * [Permutations](#permutations)
 
 
 
@@ -70,3 +71,27 @@ print(highlight({'somekey': 'somevalue', 'anotherkey': [12.4, True, 23]}))
 Output:
 
 ![syntax highlighting example output](./img/syntax_highlighting.png)
+
+### Permutations
+```python
+for perm in string_permutations('abc'):
+    print(perm)
+```
+Output:
+```
+a
+b
+c
+ab
+ac
+ba
+bc
+ca
+cb
+abc
+acb
+bac
+bca
+cab
+cba
+```
