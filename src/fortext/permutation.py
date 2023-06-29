@@ -3,7 +3,8 @@ from typing import Generator
 
 
 def permutations(string: str,
-                 max_len: int = None) -> Generator[str, None, None]:
+                 max_len: int = None,
+                 min_len: int = 1) -> Generator[str, None, None]:
     """Generates all permutations of a string.
 
     Args:
@@ -16,6 +17,6 @@ def permutations(string: str,
     if max_len is None:
         max_len = len(string)
 
-    for i in range(1, max_len + 1):
+    for i in range(min_len, max_len + 1):
         for p in _permutations(string, i):
             yield ''.join(p)
