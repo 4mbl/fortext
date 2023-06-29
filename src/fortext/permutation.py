@@ -2,9 +2,9 @@ from itertools import permutations as _permutations
 from typing import Generator
 
 
-def perms(string: str,
-          max_len: int = None,
-          min_len: int = 1) -> Generator[str, None, None]:
+def permutations(string: str,
+                 max_len: int = None,
+                 min_len: int = 1) -> Generator[str, None, None]:
     """Generates all permutations of a string.
 
     Args:
