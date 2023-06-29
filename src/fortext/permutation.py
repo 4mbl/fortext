@@ -1,10 +1,11 @@
-from itertools import permutations as _permutations
+from itertools import product, permutations as _permutations
 from typing import Generator
 
 
 def permutations(string: str,
                  max_len: int = None,
-                 min_len: int = 1) -> Generator[str, None, None]:
+                 min_len: int = 1,
+                 allow_repetition: bool = False) -> Generator[str, None, None]:
     """Generates all permutations of a string.
 
     Args:
@@ -23,6 +24,12 @@ def permutations(string: str,
 
     if min_len <= 0:
         min_len = 1
+
+    if allow_repetition:
+        for i in range(min_len, max_len + 1):
+            for p in product(string, repeat=max_len):
+                yield ''.join(p)
+        return
 
     for i in range(min_len, max_len + 1):
         for p in _permutations(string, i):
