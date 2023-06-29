@@ -1,9 +1,9 @@
-from itertools import permutations
+from itertools import permutations as _permutations
 from typing import Generator
 
 
-def string_permutations(string: str,
-                        max_len: int = None) -> Generator[str, None, None]:
+def permutations(string: str,
+                 max_len: int = None) -> Generator[str, None, None]:
     """Generates all permutations of a string.
 
     Args:
@@ -17,5 +17,5 @@ def string_permutations(string: str,
         max_len = len(string)
 
     for i in range(1, max_len + 1):
-        for p in permutations(string, i):
+        for p in _permutations(string, i):
             yield ''.join(p)
