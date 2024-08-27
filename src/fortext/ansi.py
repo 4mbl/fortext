@@ -1,5 +1,4 @@
 from enum import Enum, IntEnum
-from typing import Tuple
 
 ESC = '\033['
 RESET = f'{ESC}0m'
@@ -66,11 +65,11 @@ class Frmt(IntEnum):
     OVERLINE = 53
 
 
-def fg_rgb(rgb_color: Tuple[int, int, int]) -> str:
+def fg_rgb(rgb_color: tuple[int, int, int]) -> str:
     """Converts an RGB tuple to an ANSI escape code for foreground color.
 
     Args:
-        rgb_color (Tuple[int, int, int]): Tuple of RGB values as integers.
+        rgb_color (tuple[int, int, int]): Tuple of RGB values as integers.
 
     Returns:
         str: ANSI escape code for foreground color.
@@ -90,11 +89,11 @@ def fg_hex(hex_color: str) -> str:
     return fg_rgb(hex2rgb(hex_color))
 
 
-def bg_rgb(rgb_color: Tuple[int, int, int]) -> str:
+def bg_rgb(rgb_color: tuple[int, int, int]) -> str:
     """Converts an RGB tuple to an ANSI escape code for background color.
 
     Args:
-        rgb_color (Tuple[int, int, int]): Tuple of RGB values as integers.
+        rgb_color (tuple[int, int, int]): Tuple of RGB values as integers.
 
     Returns:
         str: ANSI escape code for background color.
@@ -114,14 +113,14 @@ def bg_hex(hex_color: str):
     return bg_rgb(hex2rgb(hex_color))
 
 
-def hex2rgb(hex_color: str) -> Tuple[int, int, int]:
+def hex2rgb(hex_color: str) -> tuple[int, int, int]:
     """Converts a hex color string to an RGB tuple of integers.
 
     Args:
         hex_color (str): Hex color string.
 
     Returns:
-        Tuple[int, int, int]: RGB tuple of integers.
+        tuple[int, int, int]: RGB tuple of integers.
     """
 
     def hex2dec(hex_str: str) -> int:
@@ -145,7 +144,7 @@ def hex2rgb(hex_color: str) -> Tuple[int, int, int]:
     return (r, g, b)
 
 
-def print_styles(ansi_type: Fg | Bg | Frmt) -> None:
+def print_styles(ansi_type: type[Fg] | type[Bg] | type[Frmt]) -> None:
     """Prints all common ANSI escape codes for a given type.
     """
 
