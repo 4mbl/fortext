@@ -1,38 +1,16 @@
 # [fortext](https://4mbl.link/gh/fortext)
+
 Text stylizer for Python. Mainly useful for CLI output.
 
 ## Table of Contents
 
 * [Table of Contents](#table-of-contents)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
   * [Installation](#installation)
 * [Usage](#usage)
   * [Text styling](#text-styling)
+  * [Print all styles](#print-all-styles)
   * [Syntax highlighting](#syntax-highlighting)
-  * [Permutations](#permutations)
-
-
-
-## Getting Started
-
-### Prerequisites
-* Install or update the [pip](https://pip.pypa.io/en/stable/) package manager.
-  ```sh
-  python3 -m pip install --upgrade pip
-  ```
-
-* It's also recommended to use a [virtual environment](https://docs.python.org/3/library/venv.html).
-  * Linux / MacOS
-    ```bash
-    python3 -m venv <venv-name>
-    source venv/bin/activate
-    ```
-  * Windows
-    ```bash
-    python3 -m venv <venv-name>
-    <venv-name>/Scripts/activate
-    ```
+  * [String permutations](#string-permutations)
 
 ### Installation
 
@@ -40,11 +18,6 @@ Use pip to install `fortext`.
 
 ```bash
 python3 -m pip install --upgrade fortext
-```
-
-Install the required dependencies as listed on [requirements.txt](./requirements.txt).
-```shell
-python3 -m pip install -r requirements.txt
 ```
 
 ## Usage
@@ -64,24 +37,35 @@ print(
           frmt=[Frmt.BOLD, Frmt.UNDERLINE, Frmt.ITALIC]))
 ```
 
+### Print all styles
+
+```python
+from fortext import print_styles_all
+print_styles_all()
+```
+
 ### Syntax highlighting
 
 ```python
 from fortext import highlight
 print(highlight({'somekey': 'somevalue', 'anotherkey': [12.4, True, 23]}))
 ```
+
 Output:
 
-![syntax highlighting example output](./img/syntax_highlighting.png)
+![syntax highlighting output](./img/syntax_highlighting.png)
 
-### Permutations
+### String permutations
+
 ```python
 from fortext import permutations
 for perm in permutations('abc'):
     print(perm)
 ```
+
 Output:
-```
+
+```text
 a
 b
 c
