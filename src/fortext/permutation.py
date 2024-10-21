@@ -5,6 +5,7 @@ from typing import Generator
 def permutations(string: str,
                  max_len: int | None = None,
                  min_len: int = 1,
+                 *,
                  allow_repetition: bool = False) -> Generator[str, None, None]:
     """Generates all permutations of a string.
 
