@@ -14,6 +14,7 @@ DEFAULT_SYNTAX_HIGHLIGHT_COLORS = {
 def highlight(value: Any,
               indent: int = 2,
               curr_indent: int = 0,
+              *,
               trailing_comma: bool = False,
               pre_indent: bool = True,
               colors: dict[str, str] | None = None):

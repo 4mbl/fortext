@@ -4,16 +4,30 @@ build-backend = "hatchling.build"
 
 [project]
 name = "fortext"
-version = "0.0.12"
+version = "1.0.0"
 authors = [{ name = "4MBL" }]
 description = "Text stylizer for Python. Mainly useful for CLI output."
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.11"
 classifiers = [
-    "Programming Language :: Python :: 3",
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
     "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development",
+    "Topic :: Utilities",
+    "Typing :: Typed",
 ]
 
 dependencies = []
