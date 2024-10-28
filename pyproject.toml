@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "fortext"
-version = "0.0.12"
+version = "1.0.0"
 authors = [{ name = "4MBL" }]
 description = "Text stylizer for Python. Mainly useful for CLI output."
 readme = "README.md"
