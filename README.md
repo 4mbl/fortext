@@ -53,7 +53,7 @@ print(highlight({'somekey': 'somevalue', 'anotherkey': [12.4, True, 23]}))
 
 Output:
 
-![syntax highlighting output](./img/syntax_highlighting.png)
+![syntax highlighting output](https://github.com/4mbl/fortext/raw/main/img/syntax_highlighting.png)
 
 ### String permutations
 
