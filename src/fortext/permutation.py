@@ -1,5 +1,8 @@
-from itertools import product, permutations as _permutations
-from typing import Generator
+"""Generate permutations of a string."""
+
+from collections.abc import Generator
+from itertools import permutations as _permutations
+from itertools import product
 
 
 def permutations(
@@ -11,15 +14,13 @@ def permutations(
         string (str): String to permute.
         max_len (int, optional): Maximum length of permutations. Defaults to length of the string.
         min_len (int, optional): Minimum length of permutations. Defaults to 1.
-        allow_repetition (bool, optional): Whether to allow repetition of characters. Defaults to False.
+        allow_repetition (bool, optional): Allow repetition of characters. Defaults to False.
 
     Yields:
         str: Permutations of the string.
+
     """
-    if max_len is None:
-        max_len = len(string)
-    else:
-        max_len = min(max_len, len(string))
+    max_len = len(string) if max_len is None else min(max_len, len(string))
 
     min_len = min(min_len, max_len)
 
@@ -27,7 +28,7 @@ def permutations(
         min_len = 1
 
     if allow_repetition:
-        for i in range(min_len, max_len + 1):
+        for _ in range(min_len, max_len + 1):
             for p in product(string, repeat=max_len):
                 yield ''.join(p)
         return
