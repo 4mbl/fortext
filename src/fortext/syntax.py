@@ -114,7 +114,10 @@ def pretty_dict(
             f'{" " * (opts["curr_indent"] + opts["indent"])}{pretty_key}: {pretty_value}{comma}\n'
         )
 
-    output_str += f'{" " * opts["curr_indent"]}{rcub}{",\n" if opts["trailing_comma"] else ""}'
+    newline = '\n'
+    output_str += (
+        f'{" " * opts["curr_indent"]}{rcub}{"," + newline if opts["trailing_comma"] else ""}'
+    )
     return output_str
 
 
@@ -156,7 +159,10 @@ def pretty_list(
         comma = ',' if (i < len(lst) - 1) else ''
         output_str += f'{" " * (opts["curr_indent"] + opts["indent"])}{pretty_value}{comma}\n'
 
-    output_str += f'{" " * opts["curr_indent"]}{rsqb}{",\n" if opts["trailing_comma"] else ""}'
+    newline = '\n'
+    output_str += (
+        f'{" " * opts["curr_indent"]}{rsqb}{"," + newline if opts["trailing_comma"] else ""}'
+    )
     return output_str
 
 
