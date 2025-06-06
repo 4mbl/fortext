@@ -2,12 +2,10 @@ from itertools import product, permutations as _permutations
 from typing import Generator
 
 
-def permutations(string: str,
-                 max_len: int | None = None,
-                 min_len: int = 1,
-                 *,
-                 allow_repetition: bool = False) -> Generator[str, None, None]:
-    """Generates all permutations of a string.
+def permutations(
+    string: str, max_len: int | None = None, min_len: int = 1, *, allow_repetition: bool = False
+) -> Generator[str, None, None]:
+    """Generate all permutations of a string.
 
     Args:
         string (str): String to permute.

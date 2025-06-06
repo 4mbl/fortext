@@ -1,3 +1,5 @@
+"""Utilities for working with ANSI escape codes."""
+
 from enum import Enum, IntEnum
 
 ESC = '\033['
@@ -5,8 +7,8 @@ RESET = f'{ESC}0m'
 
 
 class Fg(Enum):
-    """ANSI escape codes for foreground colors.
-    """
+    """ANSI escape codes for text (foreground) colors."""
+
     DEFAULT = 39
     BLACK = 30
     RED = 31
@@ -27,8 +29,8 @@ class Fg(Enum):
 
 
 class Bg(Enum):
-    """ANSI escape codes for background colors.
-    """
+    """ANSI escape codes for background colors."""
+
     DEFAULT = 49
     BLACK = 40
     RED = 41
@@ -49,8 +51,8 @@ class Bg(Enum):
 
 
 class Frmt(IntEnum):
-    """ANSI escape codes for text formatting.
-    """
+    """ANSI escape codes for text formatting."""
+
     DEFAULT = 0
     BOLD = 1
     FAINT = 2
@@ -66,71 +68,83 @@ class Frmt(IntEnum):
 
 
 def fg_rgb(rgb_color: tuple[int, int, int]) -> str:
-    """Converts an RGB tuple to an ANSI escape code for foreground color.
+    """Convert an RGB tuple into a text (foreground) color ANSI escape code.
 
     Args:
-        rgb_color (tuple[int, int, int]): Tuple of RGB values as integers.
+        rgb_color (tuple[int, int, int]):
+            Tuple of RGB values as integers.
 
     Returns:
-        str: ANSI escape code for foreground color.
+        str: ANSI escape code for text (foreground) color.
+
     """
     return f'38;2;{rgb_color[0]};{rgb_color[1]};{rgb_color[2]}'
 
 
 def fg_hex(hex_color: str) -> str:
-    """Converts a hex color string to an ANSI escape code for foreground color.
+    """Convert an hex color string into a text (foreground) color ANSI escape code.
 
     Args:
-        hex_color (str): Hex color string.
+        hex_color (str):
+            Hex color string.
 
     Returns:
-        str: ANSI escape code for foreground color.
+        str: ANSI escape code for text (foreground) color.
+
     """
     return fg_rgb(hex2rgb(hex_color))
 
 
 def bg_rgb(rgb_color: tuple[int, int, int]) -> str:
-    """Converts an RGB tuple to an ANSI escape code for background color.
+    """Convert an RGB tuple into a background color ANSI escape code.
 
     Args:
-        rgb_color (tuple[int, int, int]): Tuple of RGB values as integers.
+        rgb_color (tuple[int, int, int]):
+            Tuple of RGB values as integers.
 
     Returns:
         str: ANSI escape code for background color.
+
     """
     return f'48;2;{rgb_color[0]};{rgb_color[1]};{rgb_color[2]}'
 
 
-def bg_hex(hex_color: str):
-    """Converts a hex color string to an ANSI escape code for background color.
+def bg_hex(hex_color: str) -> str:
+    """Convert a hex color string into a background color ANSI escape code.
 
     Args:
-        hex_color (str): Hex color string.
+        hex_color (str):
+            Hex color string in the format '#RRGGBB' or 'RRGGBB'.
 
     Returns:
         str: ANSI escape code for background color.
+
     """
     return bg_rgb(hex2rgb(hex_color))
 
 
 def hex2rgb(hex_color: str) -> tuple[int, int, int]:
-    """Converts a hex color string to an RGB tuple of integers.
+    """Convert a hex color string into a RGB tuple of integers.
 
     Args:
-        hex_color (str): Hex color string.
+        hex_color (str):
+            Hex color string in the format '#RRGGBB' or 'RRGGBB'.
 
     Returns:
         tuple[int, int, int]: RGB tuple of integers.
+
     """
 
     def hex2dec(hex_str: str) -> int:
-        """Converts a hex string to an base 10 integer.
+        """Convert a hex string to an base 10 integer.
 
         Args:
-            hex_str (str): Hex string.
+            hex_str (str):
+                Hex string.
 
         Returns:
             int: Base 10 integer.
+
         """
         return int(hex_str, 16)
 
@@ -145,18 +159,21 @@ def hex2rgb(hex_color: str) -> tuple[int, int, int]:
 
 
 def print_styles(ansi_type: type[Fg] | type[Bg] | type[Frmt]) -> None:
-    """Prints all common ANSI escape codes for a given type.
-    """
+    """Print example text with all styles of a given ANSI type.
 
+    Args:
+        ansi_type (type[Fg] | type[Bg] | type[Frmt]):
+            Type of ANSI escape codes to print.
+
+    """
     for style in ansi_type:
-        print(f'{ESC}{style.value}mExample Text\t{RESET}({style.name}) ')
+        print(f'{ESC}{style.value}mExample Text\t{RESET}({style.name}) ')  # noqa: T201
 
 
 def print_styles_all() -> None:
-    """Prints all common ANSI escape codes.
-    """
+    """Print all common ANSI escape codes."""
     print_styles(Fg)
-    print()
+    print()  # noqa: T201
     print_styles(Bg)
-    print()
+    print()  # noqa: T201
     print_styles(Frmt)
