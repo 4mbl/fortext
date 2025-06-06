@@ -119,11 +119,23 @@ def test_highlight_float_value():
     assert result == expected
 
 
-def test_highlight_invalid_type():
-    value = object()
+def test_highlight_other_type():
+    class SomeClass:
+        attr: str
+
+        def __init__(self):
+            self.attr = 'value'
+
+    value = SomeClass()
     result = highlight(value)
-    expected = 'object'
+    expected = "\033[38;2;255;215;0;49m{\033[0m\n  \033[38;2;224;108;117;49m'attr'\033[0m: \033[38;2;152;195;121;49m'value'\033[0m\n\033[38;2;255;215;0;49m}\033[0m"
     assert result == expected
+
+
+def test_highlight_unsupported_type():
+    value = object()
+    with pytest.raises(TypeError):
+        highlight(value)
 
 
 def test_highlight_list_with_trailing_comma():

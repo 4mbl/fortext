@@ -39,14 +39,15 @@ DEFAULT_SYNTAX_HIGHLIGHTING_OPTIONS: SyntaxHighlightingOptions = {
 
 
 def highlight(
-    value: object,
+    value: dict | list | str | float | bool | object,
     options: SyntaxHighlightingOptions | None = None,
 ) -> str:
     """Convert a value to a string with syntax highlighting.
 
     Args:
-        value (object):
-            Value to highlight. Can be a dict, list, str, int, bool, etc.
+        value (dict | list | str | float | bool | ObjectWithDict):
+            Value to highlight. Can be a dict, list, str, int, bool,
+            or a class with a `__dict__` attribute.
         options (SyntaxHighlightingOptions | None, optional):
             Options for syntax highlighting. If None, uses default values.
 
@@ -69,7 +70,15 @@ def highlight(
         return style(repr(value), fg=opts['colors']['num'])
     if isinstance(value, bool):
         return style(repr(value), fg=opts['colors']['bool'])
-    return repr(value)
+
+    if not hasattr(value, '__dict__'):
+        msg = (
+            f'Unsupported type for syntax highlighting: {type(value).__name__}. '
+            'Expected dict, list, str, int, float, bool, or an object with a __dict__ attribute.'
+        )
+        raise TypeError(msg)
+
+    return highlight(value.__dict__, options=options)
 
 
 def pretty_dict(
