@@ -1,6 +1,6 @@
 from enum import Enum, IntEnum
 
-from .syntax import TAB
+from .constants import TAB
 
 ESC = '\033['
 RESET = f'{ESC}0m'
