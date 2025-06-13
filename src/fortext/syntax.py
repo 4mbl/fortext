@@ -1,4 +1,6 @@
 from typing import Any
+
+from .constants import NEWLINE
 from .style import style
 
 DEFAULT_SYNTAX_HIGHLIGHT_COLORS = {
@@ -9,9 +11,6 @@ DEFAULT_SYNTAX_HIGHLIGHT_COLORS = {
     'num': '#d19a58',
     'bool': '#d19a66',
 }
-
-NEWLINE = '\n'
-TAB = '\t'
 
 
 def highlight(value: Any,
