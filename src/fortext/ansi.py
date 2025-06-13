@@ -1,5 +1,7 @@
 from enum import Enum, IntEnum
 
+from .syntax import TAB
+
 ESC = '\033['
 RESET = f'{ESC}0m'
 
@@ -149,7 +151,7 @@ def print_styles(ansi_type: type[Fg] | type[Bg] | type[Frmt]) -> None:
     """
 
     for style in ansi_type:
-        print(f'{ESC}{style.value}mExample Text\t{RESET}({style.name}) ')
+        print(f'{ESC}{style.value}mExample Text{TAB}{RESET}({style.name}) ')
 
 
 def print_styles_all() -> None:
