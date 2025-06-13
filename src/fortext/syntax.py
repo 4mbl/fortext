@@ -10,6 +10,9 @@ DEFAULT_SYNTAX_HIGHLIGHT_COLORS = {
     'bool': '#d19a66',
 }
 
+NEWLINE = '\n'
+TAB = '\t'
+
 
 def highlight(value: Any,
               indent: int = 2,
@@ -85,7 +88,7 @@ def pretty_dict(dictionary: dict,
     rcub = style('}', fg=colors['dict'])
 
     pre_identation = " " * curr_indent if pre_indent else ''
-    output_str = f'{pre_identation}{lcub}\n'
+    output_str = f'{pre_identation}{lcub}{NEWLINE}'
 
     for i, (key, val) in enumerate(dictionary.items()):
         pretty_key = style(repr(key), fg=colors['key'])
@@ -96,9 +99,9 @@ def pretty_dict(dictionary: dict,
                                  colors=colors)
 
         comma = ',' if (i < len(dictionary) - 1) else ''
-        output_str += f'{" "*(curr_indent + indent)}{pretty_key}: {pretty_value}{comma}\n'
+        output_str += f'{" "*(curr_indent + indent)}{pretty_key}: {pretty_value}{comma}{NEWLINE}'
 
-    output_str += f'{" "* curr_indent}{rcub}{ ",\n" if trailing_comma else ""}'
+    output_str += f'{" "* curr_indent}{rcub}{ "," + NEWLINE if trailing_comma else ""}'
     return output_str
 
 
@@ -130,7 +133,7 @@ def pretty_list(lst: list,
     rsqb = style(']', fg=colors['arr'])
 
     pre_identation = " " * curr_indent if pre_indent else ''
-    output_str = f'{pre_identation}{lsqb}\n'
+    output_str = f'{pre_identation}{lsqb}{NEWLINE}'
 
     for i, val in enumerate(lst):
         pretty_value = highlight(val,
@@ -139,7 +142,7 @@ def pretty_list(lst: list,
                                  pre_indent=False,
                                  colors=colors)
         comma = ',' if (i < len(lst) - 1) else ''
-        output_str += f'{" "*(curr_indent + indent)}{pretty_value}{comma}\n'
+        output_str += f'{" "*(curr_indent + indent)}{pretty_value}{comma}{NEWLINE}'
 
-    output_str += f'{" "* curr_indent}{rsqb}{",\n" if trailing_comma else ""}'
+    output_str += f'{" "* curr_indent}{rsqb}{"," + NEWLINE if trailing_comma else ""}'
     return output_str
