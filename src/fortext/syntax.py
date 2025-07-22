@@ -39,7 +39,7 @@ DEFAULT_SYNTAX_HIGHLIGHTING_OPTIONS: SyntaxHighlightingOptions = {
 
 
 def highlight(
-    value: dict | list | str | float | bool | object,
+    value: dict | list | str | float | bool | object,  # noqa: FBT001
     options: SyntaxHighlightingOptions | None = None,
 ) -> str:
     """Convert a value to a string with syntax highlighting.
