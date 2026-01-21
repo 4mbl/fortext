@@ -4,8 +4,6 @@ import os
 
 from .ansi import ESC, RESET, Bg, Fg, Frmt, bg_hex, bg_rgb, fg_hex, fg_rgb
 
-NO_COLOR = os.environ.get('NO_COLOR', '0') in ('1', 'true')
-
 
 def style(
     text: str,
@@ -35,7 +33,8 @@ def style(
         str: Styled text.
 
     """
-    if NO_COLOR and not force_color:
+    no_color = os.environ.get('NO_COLOR', '0') in ('1', 'true')
+    if no_color and not force_color:
         return text
 
     if isinstance(fg, str):

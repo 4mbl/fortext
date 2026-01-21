@@ -1,3 +1,4 @@
+import os
 import pytest
 
 from fortext import (
@@ -6,6 +7,7 @@ from fortext import (
     Frmt,
     print_styles,
     print_styles_all,
+    style,
 )
 
 # internal imports for testing
@@ -68,11 +70,52 @@ def test_print_styles_all():
 
     print_styles_all()
 
-    for style in Fg:
-        assert f'\033[{style.value}mExample Text' in captured_output.getvalue()
-    for style in Bg:
-        assert f'\033[{style.value}mExample Text' in captured_output.getvalue()
-    for style in Frmt:
-        assert f'\033[{style.value}mExample Text' in captured_output.getvalue()
+    for fg in Fg:
+        assert f'\033[{fg.value}mExample Text' in captured_output.getvalue()
+    for bg in Bg:
+        assert f'\033[{bg.value}mExample Text' in captured_output.getvalue()
+    for frmt in Frmt:
+        assert f'\033[{frmt.value}mExample Text' in captured_output.getvalue()
 
     sys.stdout = sys.__stdout__  # reset stdout
+
+
+def test_style():
+    prev = os.environ.get('NO_COLOR')
+    if prev is not None:
+        del os.environ['NO_COLOR']
+
+    text = style('Hello.', fg='#ff0000', bg='#00ff00', frmt=[Frmt.BOLD])
+
+    if prev is not None:
+        os.environ['NO_COLOR'] = prev
+
+    assert text == '\x1b[38;2;255;0;0;48;2;0;255;0;1mHello.\x1b[0m'
+
+
+def test_style_nocolor():
+    prev = os.environ.get('NO_COLOR')
+    os.environ['NO_COLOR'] = '1'
+
+    text = style('Hello.', fg='#ff0000', bg='#00ff00', frmt=[Frmt.BOLD])
+
+    if prev is None:
+        del os.environ['NO_COLOR']
+    else:
+        os.environ['NO_COLOR'] = prev
+
+    assert text == 'Hello.'
+
+
+def test_style_force_color():
+    prev = os.environ.get('NO_COLOR')
+    os.environ['NO_COLOR'] = '1'
+
+    text = style('Hello.', fg='#ff0000', bg='#00ff00', frmt=[Frmt.BOLD], force_color=True)
+
+    if prev is None:
+        del os.environ['NO_COLOR']
+    else:
+        os.environ['NO_COLOR'] = prev
+
+    assert text == '\x1b[38;2;255;0;0;48;2;0;255;0;1mHello.\x1b[0m'
