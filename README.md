@@ -4,13 +4,13 @@ Text stylizer for Python. Mainly useful for CLI output.
 
 ## Table of Contents
 
-* [Table of Contents](#table-of-contents)
-  * [Installation](#installation)
-* [Usage](#usage)
-  * [Text styling](#text-styling)
-  * [Print all styles](#print-all-styles)
-  * [Syntax highlighting](#syntax-highlighting)
-  * [String permutations](#string-permutations)
+- [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+- [Usage](#usage)
+  - [Text styling](#text-styling)
+  - [Print all styles](#print-all-styles)
+  - [Syntax highlighting](#syntax-highlighting)
+  - [String permutations](#string-permutations)
 
 ### Installation
 
@@ -36,6 +36,8 @@ print(
           fg='#ff0000', bg=Bg.BLACK,
           frmt=[Frmt.BOLD, Frmt.UNDERLINE, Frmt.ITALIC]))
 ```
+
+The `style` function respects the `NO_COLOR` environment variable. This behavior can be disabled by setting `force_color=True`.
 
 ### Print all styles
 
