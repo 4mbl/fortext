@@ -26,15 +26,20 @@ python3 -m pip install --upgrade fortext
 
 ```python
 from fortext import style, Bg, Frmt
+
 print(style('Hi, human.', fg='#ff0000'))
 print(style('RGB tuple or list also works.', fg=(0, 255, 0)))
 print(style('You can also use predefined colors.', bg=Bg.BLACK))
 print(style('Want to be bold?.', frmt=[Frmt.BOLD]))
 
 print(
-    style('Want to go all in?',
-          fg='#ff0000', bg=Bg.BLACK,
-          frmt=[Frmt.BOLD, Frmt.UNDERLINE, Frmt.ITALIC]))
+    style(
+        'Want to go all in?',
+        fg='#ff0000',
+        bg=Bg.BLACK,
+        frmt=[Frmt.BOLD, Frmt.UNDERLINE, Frmt.ITALIC],
+    )
+)
 ```
 
 The `style` function respects the `NO_COLOR` environment variable. This behavior can be disabled by setting `force_color=True`.
@@ -43,6 +48,7 @@ The `style` function respects the `NO_COLOR` environment variable. This behavior
 
 ```python
 from fortext import print_styles_all
+
 print_styles_all()
 ```
 
@@ -50,6 +56,7 @@ print_styles_all()
 
 ```python
 from fortext import highlight
+
 print(highlight({'somekey': 'somevalue', 'anotherkey': [12.4, True, 23]}))
 ```
 
@@ -61,6 +68,7 @@ Output:
 
 ```python
 from fortext import permutations
+
 for perm in permutations('abc'):
     print(perm)
 ```
